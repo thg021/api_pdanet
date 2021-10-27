@@ -1,5 +1,6 @@
-import { MissingParamError } from 'presentation/errors/missing-param-error';
-import { HttpRequest, HttpResponse } from 'presentation/protocols/http';
+import { MissingParamError } from '../errors/missing-param-error';
+import { badRequest } from '../helpers/http-helper';
+import { HttpRequest, HttpResponse } from '../protocols/http';
 
 export class SignUpController {
     public handle(httpRequest: HttpRequest): HttpResponse {
@@ -7,17 +8,11 @@ export class SignUpController {
             httpRequest.body;
 
         if (!name) {
-            return {
-                statusCode: 400,
-                body: new MissingParamError('name'),
-            };
+            return badRequest(new MissingParamError('name'));
         }
 
         if (!email) {
-            return {
-                statusCode: 400,
-                body: new MissingParamError('email'),
-            };
+            return badRequest(new MissingParamError('email'));
         }
     }
 }
