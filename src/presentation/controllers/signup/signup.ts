@@ -17,7 +17,7 @@ export class SignUpController implements IController {
         this.addAccount = addAccount;
     }
 
-    public handle(httpRequest: IHttpRequest): IHttpResponse {
+    public async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
         try {
             const { name, email, password, passwordConfirmation } =
                 httpRequest.body;
@@ -46,7 +46,7 @@ export class SignUpController implements IController {
                 );
             }
 
-            const account = this.addAccount.add({
+            const account = await this.addAccount.add({
                 name,
                 email,
                 password,
