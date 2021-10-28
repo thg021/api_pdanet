@@ -16,7 +16,7 @@ export class SignUpController implements IController {
 
     public handle(httpRequest: IHttpRequest): IHttpResponse {
         try {
-            const { email } = httpRequest.body;
+            const { email, password, passwordConfirmation } = httpRequest.body;
             const requiredFields = [
                 'name',
                 'email',
@@ -34,6 +34,12 @@ export class SignUpController implements IController {
 
             if (!isValid) {
                 return badRequest(new InvalidParamError('email'));
+            }
+
+            if (passwordConfirmation !== password) {
+                return badRequest(
+                    new InvalidParamError('passwordConfirmation')
+                );
             }
         } catch (error) {
             return serverError();
