@@ -7,7 +7,9 @@
   "scripts": {
     "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "ts-node src/shared/infra/http/server.ts",
-    "test": "jest --passWithNoTests --watch",
+    "test": "jest --passWithNoTests --watch --silent",
+    "test:verbose": "jest --passWithNoTests --watch",
+    "test:unit": "jest -- --watch",
     "test:staged": "jest --passWithNoTests"
   },
   "devDependencies": {
