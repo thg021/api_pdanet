@@ -9,9 +9,11 @@ import {
 
 export class SignUpController implements IController {
     private readonly emailValidator: IEmailValidator;
+
     constructor(emailValidator: IEmailValidator) {
         this.emailValidator = emailValidator;
     }
+
     public handle(httpRequest: IHttpRequest): IHttpResponse {
         try {
             const { email } = httpRequest.body;
