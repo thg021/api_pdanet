@@ -218,4 +218,24 @@ describe('Signup controller', () => {
             password: 'any_password',
         });
     });
+
+    test('Should return 500 if addAccount throws', () => {
+        const { sut, addAccountStub } = makeSut();
+        const httpRequest = {
+            body: {
+                name: 'any',
+                email: 'any_email@email.com',
+                password: 'any_password',
+                passwordConfirmation: 'any_password',
+            },
+        };
+
+        jest.spyOn(addAccountStub, 'add').mockImplementationOnce(() => {
+            throw new Error();
+        });
+
+        const httpResponse = sut.handle(httpRequest);
+        expect(httpResponse.statusCode).toBe(500);
+        expect(httpResponse.body).toEqual(new ServerError());
+    });
 });
