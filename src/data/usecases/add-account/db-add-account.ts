@@ -17,11 +17,12 @@ export class DbAddAccount implements IAddAccount {
             accountData.password
         );
 
-        await this.addAccountRepository.add(
+        const account = await this.addAccountRepository.add(
             Object.assign({}, accountData, {
                 password: hashedPassword,
             })
         );
-        return new Promise(resolve => resolve(null));
+
+        return account;
     }
 }
