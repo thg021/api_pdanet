@@ -1,4 +1,4 @@
-import { IAccountModel } from '../model/account';
+import { IAccountModel } from '../model/IAccountModel';
 
 //regras de negocio
 export interface IAddAccountModel {

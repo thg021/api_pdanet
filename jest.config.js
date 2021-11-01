@@ -17,7 +17,13 @@ module.exports = {
   // clearMocks: false,
 
   // Indicates whether the coverage information should be collected while executing the test
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  collectCoverageFrom: [
+      '<rootDir>/src/**/*.ts',
+      "!<rootDir>/src/**/I*.ts",
+      "!<rootDir>/src/**/index*.ts",
+      "!<rootDir>/src/**/*protocol*.ts",
+      "!<rootDir>/src/**/*protocol*/*.ts"
+    ],
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
@@ -27,8 +33,9 @@ module.exports = {
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  //  "/node_modules/",
+  //  "<rootDir>/src/**/I*.ts"
+   //],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
