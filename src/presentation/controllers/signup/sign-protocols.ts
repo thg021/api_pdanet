@@ -1,4 +1,4 @@
 export * from '../../protocols';
-export * from '../../protocols/emailValidator';
-export * from '../../../domain/model/account';
-export * from '../../../domain/usecases/add-account';
+export * from '../../protocols/IEmailValidator';
+export * from '../../../domain/model/IAccountModel';
+export * from '../../../domain/usecases/IAddAccount';
