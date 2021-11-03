@@ -6,7 +6,12 @@ import {
 import { LogControllerDecorator } from './log';
 
 describe('Log Decorator', () => {
-    test('Should call controller handle ', async () => {
+    interface ISutType {
+        sut: LogControllerDecorator;
+        controllerStub: IController;
+    }
+
+    const makeController = (): IController => {
         class ControllerStub implements IController {
             async handle(httpRequest: IHttpRequest): Promise<IHttpResponse> {
                 const httpResponse: IHttpResponse = {
@@ -18,9 +23,22 @@ describe('Log Decorator', () => {
                 return new Promise(resolve => resolve(httpResponse));
             }
         }
-        const controllerStub = new ControllerStub();
-        const handleSpy = jest.spyOn(controllerStub, 'handle');
+        return new ControllerStub();
+    };
+
+    const makeSut = (): ISutType => {
+        const controllerStub = makeController();
         const sut = new LogControllerDecorator(controllerStub);
+
+        return {
+            sut,
+            controllerStub,
+        };
+    };
+
+    test('Should call controller handle ', async () => {
+        const { sut, controllerStub } = makeSut();
+        const handleSpy = jest.spyOn(controllerStub, 'handle');
         const httpRequest = {
             body: {
                 email: 'valid@mail.com',
