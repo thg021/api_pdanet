@@ -1,6 +1,7 @@
 dist/
 coverage/
 node_modules/
+db/
 temp
 yarn.lock
 *.log
