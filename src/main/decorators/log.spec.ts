@@ -1,4 +1,4 @@
-import { ILogErrorRepository } from '../../data/protocols/log-error-repository';
+import { ILogErrorRepository } from '../../data/protocols/ILog-error-repository';
 import { IAccountModel } from '../../domain/model/IAccountModel';
 import { ok, serverError } from '../../presentation/helpers/http-helper';
 import {
@@ -20,7 +20,7 @@ const makeController = (): IController => {
 
 const makeLogErrorRepository = (): ILogErrorRepository => {
     class LogErrorRepositoryStub implements ILogErrorRepository {
-        async log(stack: string): Promise<void> {
+        async logError(stack: string): Promise<void> {
             return new Promise(resolve => resolve());
         }
     }
@@ -90,7 +90,7 @@ describe('Log Decorator', () => {
 
     test('Should call LogErrorRepository with correct error if controller return a server error ', async () => {
         const { sut, controllerStub, logErrorRepositoryStub } = makeSut();
-        const logSpy = jest.spyOn(logErrorRepositoryStub, 'log');
+        const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError');
 
         jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(
             new Promise(resolve => resolve(makeServerError()))
