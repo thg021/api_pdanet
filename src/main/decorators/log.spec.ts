@@ -17,7 +17,7 @@ describe('Log Decorator', () => {
                 const httpResponse: IHttpResponse = {
                     statusCode: 200,
                     body: {
-                        name: 'thiago silvaq',
+                        name: 'thiago silva',
                     },
                 };
                 return new Promise(resolve => resolve(httpResponse));
@@ -49,5 +49,25 @@ describe('Log Decorator', () => {
         };
         await sut.handle(httpRequest);
         expect(handleSpy).toHaveBeenLastCalledWith(httpRequest);
+    });
+
+    test('Should return the same result of the controller ', async () => {
+        const { sut } = makeSut();
+
+        const httpRequest = {
+            body: {
+                email: 'valid@mail.com',
+                name: 'valid_name',
+                password: 'valid_password',
+                password_confirmation: 'valid_password',
+            },
+        };
+        const httpResponse = await sut.handle(httpRequest);
+        expect(httpResponse).toEqual({
+            statusCode: 200,
+            body: {
+                name: 'thiago silva',
+            },
+        });
     });
 });
